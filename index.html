@@ -31,8 +31,20 @@
         <span style="margin-right: 10px; font-size: 1.2em;">arXiv 2021</span>
       </div>
     </div>
-    <div class="text-center" style="margin-top: 60px; margin-bottom: 20px;">
-      <img src="gfx/overview.svg" width=60% class="img-fluid" alt="Responsive image">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="embed-responsive embed-responsive-21by9">
+          <video controls loop muted autoplay class="embed-responsive-item">
+            <source src="gfx/room_videos/room_n3.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        mip-NeRF
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          Ours
+          </div>
     </div>
     <div class="text-center" style="font-size: 1.5em; margin-bottom: 30px;">
       <a href="http://www.cvlibs.net/publications/Niemeyer2021CVPR.pdf" target="_blank" style="margin-right: 20px;">[Paper]</a>
@@ -62,7 +74,16 @@
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/fIaDXC-qRSg" allowfullscreen></iframe>
       </div>
     </div>
-    <div style="margin-top:20px;">
+    <div style="margin-top: 50px;">
+      <div class="text-center">
+        <h2>
+          Method Overview
+        </h2>
+        <img src="gfx/teaser.svg" width=100% class="img-fluid" alt="Responsive image">
+      </div>    
+    </div>
+
+    <div style="margin-top:50px;">
       <h2 class="text-center">
         Results
       </h2>
@@ -78,205 +99,8 @@
               <source src="gfx/clevr/2dgan.webm" type="video/webm">
             </video>
           </div>
-          <div class="text-center">
-            <p>Single-Object Translation for 2D-based GAN</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/clevr/ours.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Single-Object Translation for Our Method</p>
-          </div>
         </div>
       </div>
-      <p>We can perform more complex operations like circular translations or adding objects at test time.</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/clevr/translation_circle_sm.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Circular Translations</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/clevr/add_objects.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Add Objects (Trained on Two-Object Scenes)</p>
-          </div>
-        </div>
-      </div>
-      <h4>Controllable Scene Generation</h4>
-      <p>We show more examples where we control the scene during image synthesis.</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/rotation_object_sm.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Rotate Object</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/celebahq/rotate_celebahq.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Rotate Object</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/translation_horizontal_sm.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Horizontal Translation</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/translation_vertical_sm.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Vertical Translation</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/cars_app.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Change Object Appearance</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/celebahq/app_celebahq.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Change Object Appearance</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/bg_cars.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Change Background Appearance</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/churches/interpolate_appearance_bg_sm.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Change Background Appearance</p>
-          </div>
-        </div>
-      </div>
-      <h4>Out-of-Distribution Generalization</h4>
-      <p>As our model disentangles individual objects, we are able to generate out of distribution samples. For example, we can increase the horizontal translation range.</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/translation_horizontal_sm.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Training Distribution</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/outof/translation_horizontal_sm.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Out-Of-Distribution</p>
-          </div>
-        </div>
-      </div>
-      <p>We can increase the depth translation range.</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/cars/translation_vertical_sm.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Training Distribution</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/outof/translation_vertical_sm.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Out-Of-Distribution</p>
-          </div>
-        </div>
-      </div>
-      <p>We can add more objects at test time.</p>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/clevr/add_objects.webm" type="video/webm">
-            </video>
-          </div>
-          <div class="text-center">
-            <p>Out-Of Distribution (Trained On Two-Object Scenes)</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/outof/add_objects.webm" type="video/webm">
-              </video>
-          </div>
-          <div class="text-center">
-            <p>Out-Of Distribution (Trained On One-Object Scenes)</p>
-          </div>
-        </div>
-      </div>
-    </div>
     <div>
       <h2 class="text-center">
         Citation
