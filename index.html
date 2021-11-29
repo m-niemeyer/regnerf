@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>RegNeRF</title>
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <div style="text-align: center;">
+      <h1>RegNeRF</h1>
+      <h3> Regularizing Neural Radiance Fields for View Synthesis from Sparse Inputs</h3>
+      <div style="margin-bottom: 10px;">
+        <span style="margin-right: 10px; font-size: 1.2em;">Michael Niemeyer</span> <span
+          style="font-size: 1.2em;">Andreas Geiger</span>
+      </div>
+      <div>
+        <span style="margin-right: 10px; font-size: 1.2em;">Max Planck Institute for Intelligent Systems and University
+          of Tübingen</span>
+      </div>
+      <div>
+        <span style="margin-right: 10px; font-size: 1.2em;">arXiv 2021</span>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 60px; margin-bottom: 20px;">
+      <img src="gfx/overview.svg" width=60% class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="text-center" style="font-size: 1.5em; margin-bottom: 30px;">
+      <a href="http://www.cvlibs.net/publications/Niemeyer2021CVPR.pdf" target="_blank" style="margin-right: 20px;">[Paper]</a>
+      <!-- <a href="http://www.cvlibs.net/publications/Niemeyer2021CVPR_supplementary.pdf" target="_blank" style="margin-right: 20px;">[Supplementary]</a>
+      <a href="https://github.com/autonomousvision/giraffe" target="_blank" style="margin-right: 20px;">[Code]</a>
+      <a href="http://autonomousvision.github.io/giraffe" target="_blank" style="margin-right: 20px;">[Blog]</a>
+      <a href="http://www.youtube.com/watch?v=fIaDXC-qRSg&vq=hd1080&autoplay=1" target="_blank" style="margin-right: 20px;">[Video]</a>
+      <a href="https://m-niemeyer.github.io/slides/talks/giraffe/index.html" target="_blank" style="margin-right: 20px;">[Interactive Slides]</a> -->
+      <a href="https://www.youtube.com/watch?v=scnXyCSMJF4" target="_blank">[Video]</a>
+    </div>
+    <div>
+      <h2 class="text-center">
+        Abstract
+      </h2>
+      <p style="font-style: italic;">
+        Neural Radiance Fields (NeRF) have emerged as a powerful representation for the task of novel view synthesis due to their simplicity and state-of-the-art performance. Though NeRF can produce photorealistic renderings of unseen viewpoints when many input views are available, its performance drops significantly when this number is reduced. We observe that the majority of artifacts in sparse input scenarios are caused by errors in the estimated scene geometry, and by divergent behavior at the start of training. We address this by regularizing the geometry and appearance of patches rendered from unobserved viewpoints, and annealing the ray sampling space during training. We additionally use a normalizing flow model to regularize the color of unobserved viewpoints. Our model outperforms not only other methods that optimize over a single scene, but in many cases also conditional models that are extensively pre-trained on large multi-view datasets.
+      </p>
+      <p>
+        <span style="font-weight: bold;">TL;DR:</span> We regularize unseen views during optimization to enable novel-view synthesis from sparse inputs (e.g. 3 or 6 views).
+      </p>
+    </div>
+    <div style="margin-top:10px;">
+      <h2 class="text-center">
+        Video
+      </h2>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/fIaDXC-qRSg" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+      <h2 class="text-center">
+        Results
+      </h2>
+      <h4>Comparison Against a 2D-based GAN</h4>
+      <p>
+        Note how translating one object affects the other for a 2D-based GAN. In contrast, we incorporate <span
+          style="font-weight: bold;">compositional 3D scene structure</span> into the generative model, leading to more
+        consistent results.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/clevr/2dgan.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Single-Object Translation for 2D-based GAN</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/clevr/ours.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Single-Object Translation for Our Method</p>
+          </div>
+        </div>
+      </div>
+      <p>We can perform more complex operations like circular translations or adding objects at test time.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/clevr/translation_circle_sm.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Circular Translations</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/clevr/add_objects.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Add Objects (Trained on Two-Object Scenes)</p>
+          </div>
+        </div>
+      </div>
+      <h4>Controllable Scene Generation</h4>
+      <p>We show more examples where we control the scene during image synthesis.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/rotation_object_sm.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Rotate Object</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/celebahq/rotate_celebahq.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Rotate Object</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/translation_horizontal_sm.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Horizontal Translation</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/translation_vertical_sm.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Vertical Translation</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/cars_app.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Change Object Appearance</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/celebahq/app_celebahq.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Change Object Appearance</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/bg_cars.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Change Background Appearance</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/churches/interpolate_appearance_bg_sm.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Change Background Appearance</p>
+          </div>
+        </div>
+      </div>
+      <h4>Out-of-Distribution Generalization</h4>
+      <p>As our model disentangles individual objects, we are able to generate out of distribution samples. For example, we can increase the horizontal translation range.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/translation_horizontal_sm.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Training Distribution</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/outof/translation_horizontal_sm.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Out-Of-Distribution</p>
+          </div>
+        </div>
+      </div>
+      <p>We can increase the depth translation range.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/cars/translation_vertical_sm.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Training Distribution</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/outof/translation_vertical_sm.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Out-Of-Distribution</p>
+          </div>
+        </div>
+      </div>
+      <p>We can add more objects at test time.</p>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/clevr/add_objects.webm" type="video/webm">
+            </video>
+          </div>
+          <div class="text-center">
+            <p>Out-Of Distribution (Trained On Two-Object Scenes)</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/outof/add_objects.webm" type="video/webm">
+              </video>
+          </div>
+          <div class="text-center">
+            <p>Out-Of Distribution (Trained On One-Object Scenes)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-center">
+        Citation
+      </h2>
+      <p>
+        If you want to cite our work, please use:
+      </p>
+      <pre>
+        @article{Niemeyer2021Regnerf,
+          author    = {Michael Niemeyer and Andreas Geiger},  
+          title     = {RegNeRF: Regularizing Neural Radiance Fields for View Synthesis from Sparse Inputs},
+          journal   = {arXiv.org},
+          year      = {2021},
+        }
+      </pre>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
