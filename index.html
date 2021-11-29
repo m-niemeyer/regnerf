@@ -35,18 +35,12 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="embed-responsive embed-responsive-21by9">
           <video controls loop muted autoplay class="embed-responsive-item">
-            <source src="gfx/room_videos/room_n3.mp4" type="video/mp4">
+            <source src="gfx/room_videos/n3_text.mp4" type="video/mp4">
           </video>
         </div>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        mip-NeRF
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6">
-          Ours
-          </div>
     </div>
-    <div class="text-center" style="font-size: 1.5em; margin-bottom: 30px;">
+    <div class="text-center" style="font-size: 1.5em;">
       <a href="http://www.cvlibs.net/publications/Niemeyer2021CVPR.pdf" target="_blank" style="margin-right: 20px;">[Paper]</a>
       <!-- <a href="http://www.cvlibs.net/publications/Niemeyer2021CVPR_supplementary.pdf" target="_blank" style="margin-right: 20px;">[Supplementary]</a>
       <a href="https://github.com/autonomousvision/giraffe" target="_blank" style="margin-right: 20px;">[Code]</a>
@@ -55,15 +49,15 @@
       <a href="https://m-niemeyer.github.io/slides/talks/giraffe/index.html" target="_blank" style="margin-right: 20px;">[Interactive Slides]</a> -->
       <a href="https://www.youtube.com/watch?v=scnXyCSMJF4" target="_blank">[Video]</a>
     </div>
-    <div>
+    <div style="margin-top: 30px;">
       <h2 class="text-center">
         Abstract
       </h2>
       <p style="font-style: italic;">
         Neural Radiance Fields (NeRF) have emerged as a powerful representation for the task of novel view synthesis due to their simplicity and state-of-the-art performance. Though NeRF can produce photorealistic renderings of unseen viewpoints when many input views are available, its performance drops significantly when this number is reduced. We observe that the majority of artifacts in sparse input scenarios are caused by errors in the estimated scene geometry, and by divergent behavior at the start of training. We address this by regularizing the geometry and appearance of patches rendered from unobserved viewpoints, and annealing the ray sampling space during training. We additionally use a normalizing flow model to regularize the color of unobserved viewpoints. Our model outperforms not only other methods that optimize over a single scene, but in many cases also conditional models that are extensively pre-trained on large multi-view datasets.
       </p>
-      <p>
-        <span style="font-weight: bold;">TL;DR:</span> We regularize unseen views during optimization to enable novel-view synthesis from sparse inputs (e.g. 3 or 6 views).
+      <p style="font-size: 1.2em;">
+        <span style="font-weight: bold;">TL;DR:</span> We regularize unseen views during optimization to enable view synthesis from sparse inputs with as few as 3 views.
       </p>
     </div>
     <div style="margin-top:10px;">
@@ -80,6 +74,18 @@
           Method Overview
         </h2>
         <img src="gfx/teaser.svg" width=100% class="img-fluid" alt="Responsive image">
+      </div>
+      <div style="margin-top: 35px;">
+        <p>
+          NeRF optimizes the reconstruction loss for a given set of input images (<span class="text-primary">blue cameras</span>).
+          For sparse inputs, however, this leads to degenerate solutions.
+          In this work, we propose to sample unobserved views (<span class="text-danger">red cameras</span>) and <span style="font-weight: bold;"> regularize the geometry and appearance of patches</span> rendered from those views.
+          More specifically, we cast rays through the scene and render patches from unobserved viewpoints for a given radiance field f.
+          We then regularize appearance by feeding the predicted RGB patches through a trained normalizing flow model phi
+          and maximizing predicted log-likelihood.
+          We regularize geometry by enforcing a smoothness loss on the rendered depth patches.
+          Our approach leads to 3D-consistent representations <span style="font-weight: bold;">even for sparse input scenarios with as few as 3 input views</span> from which realistic novel views can be rendered.
+        </p>
       </div>    
     </div>
 
@@ -87,16 +93,41 @@
       <h2 class="text-center">
         Results
       </h2>
-      <h4>Comparison Against a 2D-based GAN</h4>
+      <h4>View Synthesis from 3 Input Views</h4>
       <p>
-        Note how translating one object affects the other for a 2D-based GAN. In contrast, we incorporate <span
-          style="font-weight: bold;">compositional 3D scene structure</span> into the generative model, leading to more
-        consistent results.</p>
+        While mip-NeRF leads to degenerate view synthesis and predicted scene geometry, our method enables realistic view synthesis from 3 input views.
+        </p>
       <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 gallery">
-          <div class="embed-responsive embed-responsive-16by9">
+        <div class="col-md-12 col-sm-12 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-21by9">
             <video controls loop muted autoplay class="embed-responsive-item">
-              <source src="gfx/clevr/2dgan.webm" type="video/webm">
+              <source src="gfx/room_videos/n3_text.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <h4>View Synthesis from 6 Input Views</h4>
+      <p>
+        For 6 input views, mip-NeRF improves but predicted renderings and the optimized scene geometry still contain floating artifacts. Our approach leads to smooth predicted scene geometry and realistic novel views.
+        </p>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-21by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/room_videos/n6_text.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <h4>View Synthesis from 9 Input Views</h4>
+      <p>
+        For 9 input views, mip-NeRF and our method both lead to high-quality view synthesis. For mip-NeRF, small floating artfiacts for far-away novel views near the table are still visible while our predicted scene geometry appears more realistic.
+      </p>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 gallery">
+          <div class="embed-responsive embed-responsive-21by9">
+            <video controls loop muted autoplay class="embed-responsive-item">
+              <source src="gfx/room_videos/n9_text.mp4" type="video/mp4">
             </video>
           </div>
         </div>
