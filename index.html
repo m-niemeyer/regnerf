@@ -42,13 +42,13 @@
     <div class="text-center" style="font-size: 1.5em; margin-top: 25px;">
       <a class="btn btn-primary btn-lg" target="_blank"
         href="https://drive.google.com/file/d/1S_NnmhypZjyMfwqcHg-YbWSSYNWdqqlo/view?usp=sharing" role="button"
-        style="margin-right: 10px;">Paper</a>
+        style="margin-right: 10px; margin-bottom: 10px;">Paper</a>
       <a class="btn btn-primary btn-lg" target="_blank"
         href="https://youtu.be/QyyyvA4-Kwc" role="button"
-        style="margin-right: 10px;">Video</a>
+        style="margin-right: 10px; margin-bottom: 10px;">Video</a>
       <a class="btn btn-primary btn-lg" target="_blank"
         href="https://drive.google.com/file/d/15ip8Fvfxp6rNRfBnbJEnFCjIJeFMH4CE/view?usp=sharing" role="button"
-        style="margin-right: 10px;">Supplementary</a>
+        style="margin-bottom: 10px;">Supplementary</a>
     </div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -67,7 +67,7 @@
       <h2 class="text-center">
         Abstract
       </h2>
-      <p style="font-style: italic;">
+      <p style="font-style: italic; margin-bottom: 5px;">
         Neural Radiance Fields (NeRF) have emerged as a powerful representation for the task of novel view synthesis due
         to their simplicity and state-of-the-art performance. Though NeRF can produce photorealistic renderings of
         unseen viewpoints when many input views are available, its performance drops significantly when this number is
@@ -78,7 +78,7 @@
         Our model outperforms not only other methods that optimize over a single scene, but in many cases also
         conditional models that are extensively pre-trained on large multi-view datasets.
       </p>
-      <p style="font-size: 1.2em;">
+      <p style="font-size: 1.2em; margin-top: 0px;">
         <span style="font-weight: bold;">TL;DR:</span> We regularize unseen views during optimization to enable view
         synthesis from sparse inputs with as few as 3 input images.
       </p>
@@ -112,6 +112,7 @@
           phi
           and maximizing predicted log-likelihood.
           We regularize geometry by enforcing a smoothness loss on the rendered depth patches.
+          Further, we avoid divergence at early stages of optimization by annealing the scene sampling space ofter the first iterations.
           Our approach leads to 3D-consistent representations <span style="font-weight: bold;">even for sparse input
             scenarios with as few as 3 input views</span> from which realistic novel views can be rendered.
         </p>
@@ -194,7 +195,7 @@
       </div>
       <div>
 
-        <h2 class="text-center">
+        <h2 class="text-center" style="margin-top: 30px;">
           Citation
         </h2>
         <p>
